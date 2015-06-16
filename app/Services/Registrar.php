@@ -1,7 +1,7 @@
 <?php namespace App\Services;
 
 use App\User;
-use Validator;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
 class Registrar implements RegistrarContract {
@@ -12,8 +12,7 @@ class Registrar implements RegistrarContract {
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function validator(array $data)
-	{
+	public function validator(array $data){
 		return Validator::make($data, [
 			'nombre' => 'required|max:255',
 			'email' => 'required|email|max:255|unique:users',
@@ -30,8 +29,7 @@ class Registrar implements RegistrarContract {
 	public function create(array $data){
 
         $wsdl = "http://localhost:52420/Sample.asmx?WSDL";
-       $client = new \nusoap_client($wsdl, true);
-      
+        $client = new \nusoap_client($wsdl, true);
 
 		//create client object
         
@@ -42,7 +40,7 @@ class Registrar implements RegistrarContract {
         $idLogin = $client->call('Login');
 
         $ID = $idLogin['LoginResult']."";
-        
+        Session::put('SesionID',$ID);
         $numsima = $client->call('getfinalLead',array('id' => $ID));
         $result1 = $numsima['getfinalLeadResult'];
         $numLead = $client->call('SumLead',array('Lead'=>$result1));
@@ -55,10 +53,10 @@ class Registrar implements RegistrarContract {
 			                                 'email' => $email
 			                                 ));
 		
-		 $result = $resultAddBP['AddLeadResult']."";
+		$result = $resultAddBP['AddLeadResult']."";
 
         
-            $user = User::create([
+        $user = User::create([
 			'nombre' => $data['nombre'],
 			'email' => $data['email'],
 			'telefono' =>$data['telefono'],

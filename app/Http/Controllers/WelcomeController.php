@@ -30,7 +30,15 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+		$wsdl = "http://localhost:52420/Sample.asmx?WSDL";
+			$client = new \nusoap_client($wsdl, true);
+			$idLogin = $client->call('Login');
+			$ID = $idLogin['LoginResult']."";
+			$ItemList = $client->call('GetItemList',array('SID' => $ID ));
+			$productos = (string)$ItemList['GetItemListResult'];
+			$dato = utf8_encode($productos);
+		    return view('home')->with('datos',$dato);
+
 	}
 
 }

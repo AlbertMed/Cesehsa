@@ -21,3 +21,5 @@ Route::controllers([
 ]);
 
 Route::get('/prueba','testController@store');
+
+Route::post('Home/datos/{valor}','HomeController@datos');

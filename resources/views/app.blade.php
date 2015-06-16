@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>CESEHSA | @yield('titulo')</title>
 
+    {!! Html::style('css/estilos.css') !!}
     {!! Html::style('bower_components/bootstrap/dist/css/bootstrap.min.css') !!}
     {!! Html::style('bower_components/bootstrap-material-design/dist/css/material.min.css') !!}
     {!! Html::style('bower_components/bootstrap-material-design/dist/css/material-fullpalette.min.css') !!}

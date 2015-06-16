@@ -1,0 +1,189 @@
+*
+{
+	margin: 0;
+	padding:0;
+}
+
+body
+{
+	background: #f0f0f0;
+	font-size: 16px;
+	font-family: Helvetica;
+}
+
+#container
+{
+	background: #fff;
+	border-radius: 1em;
+	box-shadow: 0 0 5px #444;
+	margin: 0 auto;
+	width: 960px;
+}
+
+header, footer
+{
+	background: #000;
+	border-radius: 1em;
+	color: #fff;
+	padding: 1em;
+}
+
+#content
+{
+	padding: 1em;
+}
+
+#menu
+{
+	background: orange;
+	border-radius: 0.5em;
+	color: #fff;
+	margin: 0.5em;
+	padding: 0.5em;
+}
+
+#menu ul
+{
+	list-style: none;
+	padding: 0.5em;
+}
+
+#menu ul li
+{
+	display: inline-block;
+}
+
+#menu ul li a
+{
+	border-radius: 0.3em;
+	color: #fff;
+	margin: 0.3em;
+	padding: 0.5em;
+	text-decoration: none;
+}
+
+#menu ul li a:hover
+{
+	background: #fff;
+	color: orange;
+}
+
+
+/*------ Catálogo ---------*/
+#productos
+{
+	background: rgb(296, 205, 235);
+	border-radius: 1em;
+	margin: 0 auto;
+	padding-right: 1em;
+	text-align: center;
+	width: 90%;
+}
+
+.item
+{
+	background: #fff;
+	border-radius: 0.5em;
+	display: inline-block;
+	margin: 0.5em;
+	padding: 0.5em;
+	width: 45%;
+}
+
+.item img
+{
+	height: 150px;
+	width: 150px;
+}
+
+/*------ /Catálogo ---------*/
+
+
+/*------------ Detalle Producto ---------------*/
+#detalle_producto
+{
+	background: #fafafa;
+	border-radius: 1em;
+	box-shadow: 0 0 10px #777;
+	margin: 20px auto;
+	text-align: center;
+	width: 80%;
+}
+
+#detalle_producto h3
+{
+	background: #f0f0f0;
+	padding: 0.3em;
+	text-shadow: 1px 1px 1px orange;
+}
+
+#info_producto
+{
+	display: inline-block;
+	padding: 0.5em;
+	text-align: left;
+	vertical-align: top;
+	width: 45%;
+}
+
+#info_producto form
+{
+	border: none;
+	border-radius: 0.7em;
+	margin: 0.3em;
+	padding: 0.5em;
+	text-align: center;
+}
+
+/*------------ /Detalle Producto ---------------*/
+
+/*------------- Carrito -------------------*/
+
+.tabla_items
+{
+	background: #fafafa;
+	border-radius: 1em;
+	box-shadow: 0 0 10px #777;
+	margin: 20px auto;
+	padding: 0.5em;
+	text-align: center;
+	width: 80%;
+}
+
+.tabla_items tr td
+{
+	border: 1px solid #d0d0d0;
+	border-radius: 0.2em;
+}
+
+/*------------- /Carrito -------------------*/
+
+
+/*------------ Clases varias -------------------*/
+.boton1
+{
+	background: orange;
+	border: none;
+	border-radius: 0.3em;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1em;
+	font-weight: bold;
+	margin: 0.2em;
+	padding: 0.5em;
+	text-decoration: none;
+}
+
+.boton1:hover
+{
+	background: rgb(218, 142, 3);
+}
+
+
+/*------------ /Clases -------------------*/
+
+
+
+
+
