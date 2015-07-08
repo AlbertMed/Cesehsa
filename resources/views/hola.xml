@@ -1,9 +1,5 @@
-<string xmlns="http://tempuri.org/DISSample/Sample">
-        <BOM xmlns='http://www.sap.com/SBO/DIS'>
+        <BOM>
             <BO>
-                <AdmInfo>
-                    <Object>oItems</Object>
-                </AdmInfo>
                 <Items>
                     <row>
                         <ItemCode>YP37-X-3-5.5-22</ItemCode>
@@ -707,5 +703,5 @@
                 </LocalizationInfos>
             </BO>
         </BOM>
-    </string>
+   
     

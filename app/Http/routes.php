@@ -1,5 +1,6 @@
 <?php
 
+use App\articulos;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -22,4 +23,12 @@ Route::controllers([
 
 Route::get('/prueba','testController@store');
 
-Route::post('Home/datos/{valor}','HomeController@datos');
+Route::get('/registro','testController@registro');
+
+Route::get('Home/datos/{valor}','HomeController@datos');
+
+Route::get('productos/{num}', 'HomeController@listarProductos');
+
+Route::get('carrito', 'CarritoController@index');
+
+Route::get('addItemCarrito/{valor}', 'CarritoController@store');

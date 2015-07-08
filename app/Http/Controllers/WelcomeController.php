@@ -1,5 +1,5 @@
 <?php namespace App\Http\Controllers;
-
+use Session;
 class WelcomeController extends Controller {
 
 	/*
@@ -30,13 +30,18 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		$wsdl = "http://localhost:52420/Sample.asmx?WSDL";
+		   $wsdl = "http://localhost:52420/Sample.asmx?WSDL";
 			$client = new \nusoap_client($wsdl, true);
 			$idLogin = $client->call('Login');
 			$ID = $idLogin['LoginResult']."";
 			$ItemList = $client->call('GetItemList',array('SID' => $ID ));
 			$productos = (string)$ItemList['GetItemListResult'];
 			$dato = utf8_encode($productos);
+            
+            $ItemsCar = array();
+            Session::put('Sid', $ID);
+            Session::put('itemsCar', $ItemsCar);
+
 		    return view('home')->with('datos',$dato);
 
 	}

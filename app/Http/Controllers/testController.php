@@ -2,6 +2,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Articulos;
 class testController extends Controller {
 	/**
 	* Display a listing of the resource.
@@ -97,5 +98,43 @@ class testController extends Controller {
 	public function destroy($id)
 	{
 		//
+	}
+
+	public function registro()
+	{
+		set_time_limit ( 1200 );
+		
+    	$wsdl = "http://localhost:52420/Sample.asmx?WSDL";
+		$client = new \nusoap_client($wsdl, true);
+		$idLogin = $client->call('Login');
+		$ID = $idLogin['LoginResult']."";
+
+		
+		 //datos de stock
+		
+		$DatosStock = $client->call('getStock',array('SID' => $ID));
+		$productos = (string)$DatosStock['getStockResult'];
+		$articulos = utf8_encode($productos);
+        //*/
+
+
+	$BOM = new \SimpleXMLElement($articulos);
+				       //echo $datos;
+	$numProductos = (int)$BOM->BO->OITW->row->count();
+    for($i=0; $i<$numProductos; $i++){ 
+       
+       if(!empty($BOM->BO->OITW->row[$i]->ItemName)) { 
+
+			$articulos =array(
+				'id'=>$i,
+				'ItemCode'=>(string)$BOM->BO->OITW->row[$i]->ItemCode,
+				'ItemName'=>(string)$BOM->BO->OITW->row[$i]->ItemName
+			);
+
+            Articulos::create($articulos);
+            
+            }
+		}	
+    
 	}
 }
