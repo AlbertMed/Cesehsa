@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 use Session;
+use App\Articulos;
 class HomeController extends Controller {
 	/*
 	|--------------------------------------------------------------------------
@@ -26,36 +27,32 @@ class HomeController extends Controller {
 	 * @return Response
 	 */
 	public function index(){
-		$wsdl = "http://localhost:52420/Sample.asmx?WSDL";
+        
+        //$Articulos = Articulos::All();
+
+        /*
+         *datos de conexión
+        */
+        $wsdl = "http://187.188.85.203:8036/Sample.asmx?WSDL";
+
+        // 192.168.1.12:8036
 		$client = new \nusoap_client($wsdl, true);
 		$idLogin = $client->call('Login');
 		$ID = $idLogin['LoginResult']."";
 
 		/*
-		* funcion para traer una lista de todos los productos
-		 */
-		$ItemList = $client->call('GetItemList',array('SID' => $ID ));
-		//$xml = $client->call('AsString',array('xmlDoc' => $ItemList['GetEmptyBPXmlResponse']));
-		$productos = (string)$ItemList['GetItemListResult'];
+		 * datos de stock
+		*/
+		$DatosStock = $client->call('getStock',array('SID' => $ID));
+		$productos = (string)$DatosStock['getStockResult'];
 		$datos = utf8_encode($productos);
 
-         /*
-         * funcion para traer el detalle de cada producto
-          */
-		$detalle = $client->call('GetDetalle',array('SID' => $ID , 'producto' => $valor));
-		$producto = (string)$ItemList['GetDetalleResult'];
-		$dato = utf8_encode($producto);
 
-		$data = array(
-            'datos' => $datos,
-            'detalle' => $dato
-        );
-		
-		return view('home',$data);
+		return view('home')->with('datos',$datos);
 	}
 
 	public function datos($valor){
-		$wsdl = "http://localhost:52420/Sample.asmx?WSDL";
+		$wsdl = "http://187.188.85.203:8036/Sample.asmx?WSDL";
 		$client = new \nusoap_client($wsdl, true);
 		$idLogin = $client->call('Login');
 		$ID = $idLogin['LoginResult']."";
@@ -66,12 +63,28 @@ class HomeController extends Controller {
 		$productos = (string)$ItemList['GetDetalleResult'];
 		$datos = utf8_encode($productos);
 
-
-
-
 		return view('detalle_producto')->with('datos',$datos);
+		//return view('producto.detalle');
 	}
 
+    public function listarProductos(){
+    	$articulos = Articulos::paginate(12);
+    	
+    	/*
+    	$wsdl = "http://localhost:52420/Sample.asmx?WSDL";
+		$client = new \nusoap_client($wsdl, true);
+		$idLogin = $client->call('Login');
+		$ID = $idLogin['LoginResult']."";
 
+		
+		 //datos de stock
+		
+		$DatosStock = $client->call('getStock',array('SID' => $ID));
+		$productos = (string)$DatosStock['getStockResult'];
+		$articulos = utf8_encode($productos);
+        //*/
+
+		return view('producto.listar2')->with('datos',$articulos);
+    }
 }
 	
